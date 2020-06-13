@@ -1,0 +1,77 @@
+Table necesidad {
+  id integer [pk, increment]
+  datetime_insercion datetime
+  remitente integer 
+  lugar integer 
+  tipo_gestion integer
+  periodicidad varchar
+  descripcion varchar
+  fecha_finalizacion datetime
+  estado integer
+}
+
+Table lugar {
+  id integer [pk, increment]
+  region integer
+  localidad varchar
+  comuna integer
+  direccion varchar
+  punto point
+}
+
+Table voluntario {
+  id integer
+  rango float
+}
+
+Table proveedor {
+  id integer [pk, increment]
+  tipo_gestion integer 
+  despacho  boolean 
+  id_remitente integer 
+  id_lugar integer 
+  descripcion varchar
+  rango float
+  activo boolean
+}
+
+Table tipo_gestion {
+  id integer
+  categoria varchar
+  especifico varchar
+}
+
+Table bitacora {
+  id integer
+  fecha datetime
+  id_necesidad integer
+  id_proveedor integer
+  
+}
+
+Table ayuda {
+  id integer [pk, increment]
+  nombre varchar
+  tipo_gestion integer
+  id_organizacion integer
+  id_remitente integer 
+  id_lugar integer 
+  descripcion varchar
+  rango float
+  activo boolean
+}
+
+Table participante {
+  id integer [pk, increment]
+  nombre varchar
+  apellido varchar
+  rut varchar
+  contacto integer
+  id_lugar integer 
+}
+
+Table contacto {
+  nombre varchar
+  apellido varchar
+  
+}

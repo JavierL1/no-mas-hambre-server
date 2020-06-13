@@ -1,0 +1,115 @@
+Table necesidad {
+  id integer [pk, increment]
+  datetime_insercion datetime
+  id_remitente integer [ref: > persona.id]
+  id_organizacion integer [ref: > organizacion.id]
+  id_ayudado integer [ref: > persona.id]
+  id_lugar integer [ref: > lugar.id]
+  id_tipo_necesidad integer [ref: > tipo_necesidad.id]
+  descripcion varchar
+}
+
+Table tipo_necesidad {
+  id integer [pk, increment]
+  nombre varchar
+}
+
+Table persona {
+  id integer [pk, increment]
+  nombre varchar
+  apellido varchar
+  
+}
+
+Table contacto {
+  id integer [pk, increment]
+  id_tipo_contacto integer [ref: > tipo_contacto.id]
+  contenido varchar
+}
+
+Table tipo_contacto {
+  id integer [pk, increment]
+  nombre varchar
+}
+
+Table persona_contacto {
+  id integer [pk, increment]
+  id_persona integer [ref: > persona.id]
+  id_contacto integer [ref:  > contacto.id]
+}
+
+Table voluntariado {
+  id integer [pk, increment]
+  datetime_insercion datetime
+  id_remitente integer [ref: > persona.id]
+  id_organizacion integer [ref: > organizacion.id]
+  id_lugar integer [ref: > lugar.id]
+  descripcion varchar
+}
+
+Table lugar {
+  id integer [pk, increment]
+  region integer
+  localidad varchar
+  comuna integer
+  direccion varchar
+  punto point
+}
+
+Table proveedor{
+  id integer [pk, increment]
+  id_tipo_proveedor integer [ref: > tipo_proveedor.id]
+  id_tipo_servicio  integer [ref: > tipo_entrega.id]
+  id_remitente integer [ref: > persona.id]
+  id_lugar integer [ref: > lugar.id]
+  descripcion varchar
+}
+
+Table tipo_proveedor {
+  id integer [pk, increment]
+  nombre varchar
+}
+
+Table tipo_entrega {
+  id integer [pk, increment]
+  nombre varchar
+}
+
+Table atencion_necesidad {
+  id integer [pk, increment]
+  id_necesidad integer [ref: > necesidad.id]
+  id_proveedor integer [ref: > proveedor.id]
+  id_voluntario integer [ref: > persona.id]
+  id_iniciativa integer [ref: > iniciativa.id]
+  id_estado_atencion_necesidad integer [ref: > estado_atencion_necesidad.id]
+  fecha_ingreso date
+  fecha_termino date
+}
+
+Table estado_atencion_necesidad {
+  id integer [pk, increment]
+  nombre varchar
+}
+
+Table iniciativa {
+  id integer [pk, increment]
+  nombre varchar
+  id_organizacion integer [ref: > organizacion.id]
+  id_remitente integer [ref: > persona.id]
+  id_lugar integer [ref: > lugar.id]
+  descripcion varchar
+}
+
+Table organizacion {
+  id integer [pk, increment]
+  id_representante integer [ref: > persona.id]
+  nombre varchar
+  apellido varchar
+  id_lugar integer [ref: > lugar.id]
+}
+
+Table integrantes {
+  id integer [pk, increment]
+  id_organizacion integer [ref: > organizacion.id]
+  id_integrante integer [ref: > persona.id]
+}

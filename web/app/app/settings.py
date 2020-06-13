@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'app.wsgi.application'
 DATABASES = {
     'default':
         dj_database_url.parse(
-            'postgresql://postgres:example@localhost:5432/postgres'
+            'postgresql://postgres:example@localhost:5432/no_mas_hambre'
         )
         # dj_database_url.parse(
         #     'postgresql://postgres:example@db:5432/postgres'

@@ -128,3 +128,7 @@ class Participante(models.Model):
         related_name='per_participantes'
     )
     activo = models.BooleanField(verbose_name='activo', default=True)
+
+
+class TipoGestion(models.Model):
+    etiqueta = models.CharField('etiqueta', max_length=64)

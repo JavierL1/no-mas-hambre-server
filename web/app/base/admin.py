@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Comuna, Contacto, Lugar, Persona, Region, TipoContacto
+from .models import Comuna, Contacto, Lugar, Persona, Region
 
 # Register your models here.
 
@@ -26,9 +26,4 @@ class PersonaAdmin(admin.ModelAdmin):
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(TipoContacto)
-class TipoContactoAdmin(admin.ModelAdmin):
     pass

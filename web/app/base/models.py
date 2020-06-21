@@ -3,36 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class Persona(models.Model):
-    nombre = models.CharField('nombre', max_length=64)
-    apellido = models.CharField('apellido', max_length=64)
-
-
-class TipoContacto(models.Model):
-    class Meta:
-        verbose_name_plural = 'tipos contacto'
-
-    nombre = models.CharField('nombre', max_length=64)
-
-
-class Contacto(models.Model):
-    tipo_contacto = models.ForeignKey(
-        TipoContacto,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='contactos'
-    )
-    contenido = models.CharField('url/usuario/numero', max_length=300)
-    persona = models.ForeignKey(
-        Persona,
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True,
-        related_name='contactos'
-    )
-
-
 class Region(models.Model):
     class Meta:
         verbose_name_plural = 'regiones'
@@ -72,4 +42,46 @@ class Lugar(models.Model):
         max_length=300,
         blank=True,
         null=True
+    )
+
+
+class Persona(models.Model):
+    nombre = models.CharField('nombre', max_length=64)
+    apellido = models.CharField('apellido', max_length=64)
+    rut = models.IntegerField('rut')
+    dv = models.IntegerField('dv')
+    lugar = models.ForeignKey(
+        Lugar,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='personas'
+    )
+
+
+class Contacto(models.Model):
+    class TipoContacto(models.TextChoices):
+        NO_ASIGNADA = 'NA'
+        TELEFONO_MOVIL = 'TM'
+        TELEFONO_FIJO = 'TF'
+        FACEBOOK = 'FB'
+        TWITTER = 'TW'
+        INSTAGRAM = 'IG'
+        LINKED_IN = 'LI'
+        EMAIL = 'EM'
+
+
+    tipo_contacto = models.CharField(
+        'tipo de contacto',
+        max_length=2,
+        choices=TipoContacto.choices,
+        default=TipoContacto.NO_ASIGNADA
+    )
+    contenido = models.CharField('url/usuario/numero', max_length=300)
+    persona = models.ForeignKey(
+        Persona,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='contactos'
     )

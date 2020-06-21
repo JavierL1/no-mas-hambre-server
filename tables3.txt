@@ -1,0 +1,112 @@
+Table lugar {
+  id integer [pk, increment]
+  region integer
+  localidad varchar
+  comuna integer
+  direccion varchar
+  punto point
+}
+
+Table contacto {
+  id integer [pk, increment]
+  tipo_contacto varchar
+  contenido varchar
+}
+
+Table persona_contacto {
+  id integer [pk, increment]
+  id_persona integer [ref: > persona.id]
+  id_contacto integer [ref:  > contacto.id]
+}
+
+Table persona {
+  id integer [pk, increment]
+  nombre varchar
+  apellido varchar
+  rut integer
+  dv integer
+  id_lugar integer [ref: > lugar.id]
+}
+
+Table organizacion {
+  id integer [pk, increment]
+  nombre varchar
+  apellido varchar
+  rut integer
+  dv integer
+  id_lugar integer [ref: > lugar.id]
+}
+
+Table participante {
+  id integer [pk, increment]
+  id_organizacion integer [ref: > organizacion.id]
+  id_integrante integer [ref: > persona.id]
+  activo boolean
+}
+
+Table tipo_gestion {
+  id integer [pk, increment]
+  categoria varchar
+  keyword varchar
+}
+
+Table necesidad {
+  id integer [pk, increment]
+  fecha_insercion datetime
+  id_remitente integer [ref: > participante.id]
+  id_ayudado integer [ref: > participante.id]
+  id_lugar integer [ref: > lugar.id]
+  periodicidad varchar
+  descripcion varchar
+  fecha_finalizacion datetime
+  id_tipo_gestion integer [ref: > tipo_gestion.id]
+  estado_necesidad varchar
+}
+
+
+Table voluntario {
+  id integer [pk, increment]
+  datetime_insercion datetime
+  id_remitente integer [ref: > participante.id]
+  descripcion varchar
+}
+
+
+Table proveedor {
+  id integer [pk, increment]
+  id_tipo_gestion integer [ref: > tipo_gestion.id]
+  despacho  boolean
+  id_remitente integer [ref: > participante.id]
+  id_lugar integer [ref: > lugar.id]
+  descripcion varchar
+  rango float
+  activo boolean
+}
+
+Table ayuda {
+  id integer [pk, increment]
+  nombre varchar
+  id_tipo_gestion integer [ref: > tipo_gestion.id]
+  id_remitente integer [ref: > participante.id]
+  id_lugar integer [ref: > lugar.id]
+  descripcion varchar
+  rango float
+  activo boolean
+}
+
+Table evento {
+  id integer [pk, increment]
+  id_voluntario integer [ref: > voluntario.id]
+  id_proveedor integer [ref: > proveedor.id]
+  id_ayuda integer [ref: > ayuda.id]
+  id_necesidad integer [ref: > necesidad.id]
+  id_lugar integer [ref: > lugar.id]
+  fecha datetime
+  id_accion integer [ref: > accion.id]
+  descripcion varchar
+}
+
+Table accion {
+  id integer [pk, increment]
+  nombre varchar
+}

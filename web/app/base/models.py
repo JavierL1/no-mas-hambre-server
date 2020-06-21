@@ -5,6 +5,7 @@ from django.db import models
 
 class Region(models.Model):
     class Meta:
+        verbose_name = 'región'
         verbose_name_plural = 'regiones'
 
     nombre = models.CharField(verbose_name='nombre', max_length=64)
@@ -94,6 +95,10 @@ class Contacto(models.Model):
 
 
 class Organizacion(models.Model):
+    class Meta:
+        verbose_name = 'organización'
+        verbose_name_plural = 'organizaciones'
+
     nombre = models.CharField('nombre', max_length=64)
     apellido = models.CharField(
         'apellido', max_length=64, null=True, blank=True
@@ -131,4 +136,8 @@ class Participante(models.Model):
 
 
 class TipoGestion(models.Model):
+    class Meta:
+        verbose_name = 'tipo gestión'
+        verbose_name_plural = 'tipos gestión'
+
     etiqueta = models.CharField('etiqueta', max_length=64)

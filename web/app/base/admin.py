@@ -1,17 +1,22 @@
 from django.contrib import admin
 from .models import Comuna, Contacto, Lugar, Organizacion, Participante
-from .models import Persona, Region, TipoGestion
+from .models import Persona, Provincia, Region, TipoGestion
 
 # Register your models here.
 
 @admin.register(Region)
 class RegionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nombre', 'codigo', )
+
+
+@admin.register(Provincia)
+class ProvinciaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'codigo', )
 
 
 @admin.register(Comuna)
 class ComunaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nombre', 'codigo', )
 
 
 @admin.register(Lugar)

@@ -10,16 +10,27 @@ class Region(models.Model):
 
     nombre = models.CharField(verbose_name='nombre', max_length=64)
     codigo = models.IntegerField(verbose_name='código')
-    posicion = models.IntegerField(verbose_name='posición')
-    alias = models.CharField(verbose_name='alias', max_length=64)
+    posicion = models.IntegerField(verbose_name='posición', null=True)
+    alias = models.CharField(verbose_name='alias', null=True, max_length=64)
+
+
+class Provincia(models.Model):
+    nombre = models.CharField(verbose_name='nombre', max_length=64)
+    codigo = models.IntegerField(verbose_name='código')
+    region = models.ForeignKey(
+        Region,
+        verbose_name='región',
+        on_delete=models.CASCADE,
+        related_name='provincias'
+    )
 
 
 class Comuna(models.Model):
     nombre = models.CharField(verbose_name='nombre', max_length=64)
     codigo = models.IntegerField(verbose_name='código')
-    region = models.ForeignKey(
-        Region,
-        verbose_name='comuna',
+    provincia = models.ForeignKey(
+        Provincia,
+        verbose_name='provincia',
         on_delete=models.CASCADE,
         related_name='comunas'
     )
@@ -118,7 +129,7 @@ class Organizacion(models.Model):
 class Participante(models.Model):
     organizacion = models.ForeignKey(
         Organizacion,
-        verbose_name='persona',
+        verbose_name='organización',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

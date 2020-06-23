@@ -44,7 +44,7 @@ class Necesidad(models.Model):
     periodicidad = models.CharField(
         verbose_name='periodicidad', max_length=300
     )
-    descripcion = models.CharField(verbose_name='descripción', max_length=300)
+    descripcion = models.CharField(verbose_name='descripción', max_length=1024)
     fecha_finalizacion = models.DateTimeField(
         verbose_name='fecha de finalización',
         blank=True,
@@ -90,7 +90,7 @@ class Proveedor(models.Model):
         null=True,
         related_name='proveedores'
     )
-    descripcion = models.CharField(verbose_name='descripción', max_length=300)
+    descripcion = models.CharField(verbose_name='descripción', max_length=1024)
     rango = models.FloatField(verbose_name='rango')
     activo = models.BooleanField(verbose_name='activo')
 
@@ -105,7 +105,7 @@ class Voluntario(models.Model):
         null=True,
         related_name='voluntarios'
     )
-    descripcion = models.CharField(verbose_name='descripción', max_length=300)
+    descripcion = models.CharField(verbose_name='descripción', max_length=1024)
 
 
 class Ayuda(models.Model):
@@ -135,7 +135,7 @@ class Ayuda(models.Model):
         null=True,
         related_name='ayudas'
     )
-    descripcion = models.CharField(verbose_name='descripción', max_length=300)
+    descripcion = models.CharField(verbose_name='descripción', max_length=1024)
     rango = models.FloatField(verbose_name='rango')
     activo = models.BooleanField(verbose_name='activo')
 
@@ -186,7 +186,7 @@ class Evento(models.Model):
         related_name='eventos'
     )
     fecha = models.DateTimeField(verbose_name='fecha')
-    descripcion = models.CharField(verbose_name='descripción', max_length=300)
+    descripcion = models.CharField(verbose_name='descripción', max_length=1024)
     accion = models.ForeignKey(
         Accion,
         verbose_name='acción',

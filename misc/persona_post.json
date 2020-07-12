@@ -1,0 +1,26 @@
+{
+    "lugar": {
+        "localidad": "montevideo 2401",
+        "comuna": {
+            "codigo": 13128
+        }
+    },
+    "contactos": [
+        {
+            "contenido": "javierls44",
+            "tipo": {
+                "nombre": "facebook"
+            }
+        },
+        {
+            "contenido": "javierlpoi",
+            "tipo": {
+                "nombre": "instagram"
+            }
+        }
+    ],
+    "nombre": "javier",
+    "apellido": "levio",
+    "rut": 18847367,
+    "dv": 9
+}

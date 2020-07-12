@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register(r'comunas', views.ComunaViewSet)
 router.register(r'lugares', views.LugarViewSet)
 router.register(r'personas', views.PersonaViewSet)
+router.register(r'organizaciones', views.OrganizacionViewSet)
 
 
 urlpatterns = [

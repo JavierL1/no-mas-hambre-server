@@ -17,3 +17,8 @@ class LugarViewSet(viewsets.ModelViewSet):
 class PersonaViewSet(viewsets.ModelViewSet):
     queryset = models.Persona.objects.all()
     serializer_class = serializers.PersonaSerializer
+
+
+class OrganizacionViewSet(viewsets.ModelViewSet):
+    queryset = models.Organizacion.objects.all()
+    serializer_class = serializers.OrganizacionSerializer

@@ -1,11 +1,6 @@
-import logging
-
 from rest_framework import serializers
 
 from base import models
-
-
-logger = logging.getLogger(__name__)
 
 
 class RegionSerializer(serializers.ModelSerializer):
@@ -41,7 +36,6 @@ class LugarSerializer(serializers.ModelSerializer):
         fields = ['localidad', 'comuna', 'direccion']
 
     def create(self, validated_data):
-        logger.error(validated_data)
         comuna_data = validated_data.pop('comuna')
         comuna = models.Comuna.objects.get(codigo=comuna_data.get('codigo'))
         validated_data['comuna'] = comuna
@@ -63,10 +57,12 @@ class ContactoSerializer(serializers.ModelSerializer):
         fields = ['contenido', 'tipo']
 
     def create(self, validated_data):
-        logger.error(validated_data)
         tipo_data = validated_data.pop('tipo')
         tipo, _ = models.TipoContacto.objects \
-            .get_or_create(nombre=tipo_data.get('nombre'))
+            .get_or_create(
+                nombre=tipo_data.get('nombre').lower(),
+                defaults={'descripcion': tipo_data.get('descripcion')}
+            )
         contacto = models.Contacto.objects.create(tipo=tipo, **validated_data)
         return contacto
 
@@ -80,7 +76,6 @@ class PersonaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        logger.error(validated_data)
         contactos_data = validated_data.pop('contactos')
         lugar_data = validated_data.pop('lugar')
         validated_data['lugar'] = LugarSerializer().create(lugar_data)
@@ -90,3 +85,29 @@ class PersonaSerializer(serializers.ModelSerializer):
                 {'persona': persona, **contacto_data}
             )
         return persona
+
+
+class TipoOrganizacionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.TipoOrganizacion
+        fields = ['nombre', 'descripcion']
+
+
+class OrganizacionSerializer(serializers.ModelSerializer):
+    tipo = TipoOrganizacionSerializer()
+    lugar = LugarSerializer()
+
+    class Meta:
+        model = models.Organizacion
+        fields = '__all__'
+
+    def create(self, validated_data):
+        tipo_data = validated_data.pop('tipo')
+        validated_data['tipo'], _ = models.TipoOrganizacion.objects \
+            .get_or_create(
+                nombre=tipo_data.get('nombre').lower(),
+                defaults={'descripcion': tipo_data.get('descripcion')}
+            )
+        lugar_data = validated_data.pop('lugar')
+        validated_data['lugar'] = LugarSerializer().create(lugar_data)
+        return models.Organizacion.objects.create(**validated_data)

@@ -1,0 +1,17 @@
+{
+    "lugar": {
+        "localidad": "Vicuña Mackenna 1370, Ñuñoa",
+        "comuna": {
+            "codigo": 13120
+        },
+        "direccion": null
+    },
+    "tipo": {
+        "nombre": "canal de televisión",
+        "descripcion": null
+    },
+    "nombre": "Megavisión",
+    "apellido": null,
+    "rut": 79952350,
+    "dv": 7
+}

@@ -1,26 +1,27 @@
 {
     "lugar": {
-        "localidad": "montevideo 2401",
+        "localidad": "Morandé con compañía, Santiago",
         "comuna": {
-            "codigo": 13128
-        }
+            "codigo": 13101
+        },
+        "direccion": null
     },
     "contactos": [
         {
-            "contenido": "javierls44",
+            "contenido": "https://www.facebook.com/Oficial.Karol",
             "tipo": {
                 "nombre": "facebook"
             }
         },
         {
-            "contenido": "javierlpoi",
+            "contenido": "karol_lucerov",
             "tipo": {
                 "nombre": "instagram"
             }
         }
     ],
-    "nombre": "javier",
-    "apellido": "levio",
-    "rut": 18847367,
+    "nombre": "karol",
+    "apellido": "lucero",
+    "rut": 12345678,
     "dv": 9
 }

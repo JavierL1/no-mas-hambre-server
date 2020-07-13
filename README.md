@@ -4,7 +4,7 @@ Un servidor basado en Django 3.0 sobre una DB PostgreSQL
 # Setup Development
 - Instalar [Docker](https://docs.docker.com/engine/install/)
 - Instalar Python 3.8. Se recomienda instalar mediante un ambiente de [Conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html)
-- Instalar (Poetry)[https://python-poetry.org/docs/#installation]
+- Instalar [Poetry](https://python-poetry.org/docs/#installation)
 - Abrir terminal en la raíz del proyecto y correr
 ```
 docker-compose --f .\docker-compose-dev.yml up --build -d

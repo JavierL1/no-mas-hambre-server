@@ -33,7 +33,6 @@ python web/app/manage.py runserver PORT
 
 # Setup production
 - Instalar [Docker](https://docs.docker.com/engine/install/)
-- 
 - Abrir terminal en la raíz del proyecto y correr
 ```
 docker-compose up --build -d

@@ -31,7 +31,7 @@ python web/app/manage.py createsuperuser
 python web/app/manage.py runserver PORT
 ```
 
-# Setup production
+# Setup Production
 - Instalar [Docker](https://docs.docker.com/engine/install/)
 - Abrir terminal en la raíz del proyecto y correr
 ```

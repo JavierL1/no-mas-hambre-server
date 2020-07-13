@@ -46,7 +46,8 @@ class LugarSerializer(serializers.ModelSerializer):
 class TipoContactoSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TipoContacto
-        fields = ['nombre', 'descripcion']
+        fields = '__all__'
+        extra_kwargs = {'nombre': {'validators': []}}
 
 
 class ContactoSerializer(serializers.ModelSerializer):
@@ -90,7 +91,8 @@ class PersonaSerializer(serializers.ModelSerializer):
 class TipoOrganizacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.TipoOrganizacion
-        fields = ['nombre', 'descripcion']
+        fields = '__all__'
+        extra_kwargs = {'nombre': {'validators': []}}
 
 
 class OrganizacionSerializer(serializers.ModelSerializer):

@@ -15,10 +15,15 @@ class LugarViewSet(viewsets.ModelViewSet):
 
 
 class PersonaViewSet(viewsets.ModelViewSet):
-    queryset = models.Persona.objects.all()
+    queryset = models.Persona.objects.all().order_by('lugar__comuna__nombre')
     serializer_class = serializers.PersonaSerializer
 
 
 class OrganizacionViewSet(viewsets.ModelViewSet):
-    queryset = models.Organizacion.objects.all()
+    queryset = models.Organizacion.objects.all().order_by('nombre')
     serializer_class = serializers.OrganizacionSerializer
+
+
+class ParticipanteViewSet(viewsets.ModelViewSet):
+    queryset = models.Participante.objects.all().order_by('id')
+    serializer_class = serializers.ParticipanteSerializer

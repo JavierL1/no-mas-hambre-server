@@ -113,3 +113,22 @@ class OrganizacionSerializer(serializers.ModelSerializer):
         lugar_data = validated_data.pop('lugar')
         validated_data['lugar'] = LugarSerializer().create(lugar_data)
         return models.Organizacion.objects.create(**validated_data)
+
+
+class ParticipanteSerializer(serializers.ModelSerializer):
+    persona = PersonaSerializer()
+    organizacion = OrganizacionSerializer()
+
+    class Meta:
+        model = models.Participante
+        fields = '__all__'
+
+    def create(self, validated_data):
+        organizacion_data = validated_data.pop('organizacion')
+        organizacion = OrganizacionSerializer().create(organizacion_data)
+        persona_data = validated_data.pop('persona')
+        persona = PersonaSerializer().create(persona_data)
+        activo = validated_data.get('activo', True)
+        return models.Participante.objects.create(
+            organizacion=organizacion, persona=persona, activo=activo
+        )

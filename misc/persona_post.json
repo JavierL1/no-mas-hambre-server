@@ -1,0 +1,27 @@
+{
+    "lugar": {
+        "localidad": "Morandé con compañía, Santiago",
+        "comuna": {
+            "codigo": 13101
+        },
+        "direccion": null
+    },
+    "contactos": [
+        {
+            "contenido": "https://www.facebook.com/Oficial.Karol",
+            "tipo": {
+                "nombre": "facebook"
+            }
+        },
+        {
+            "contenido": "karol_lucerov",
+            "tipo": {
+                "nombre": "instagram"
+            }
+        }
+    ],
+    "nombre": "karol",
+    "apellido": "lucero",
+    "rut": 12345678,
+    "dv": 9
+}

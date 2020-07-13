@@ -1,44 +1,61 @@
 from django.contrib import admin
-from .models import Comuna, Contacto, Lugar, Organizacion, Participante
-from .models import Persona, Region, TipoGestion
+from base import models
 
 # Register your models here.
 
-@admin.register(Region)
+
+@admin.register(models.Region)
 class RegionAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nombre', 'codigo', )
 
 
-@admin.register(Comuna)
+@admin.register(models.Provincia)
+class ProvinciaAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'codigo', )
+
+
+@admin.register(models.Comuna)
 class ComunaAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('nombre', 'codigo', )
 
 
-@admin.register(Lugar)
+@admin.register(models.Lugar)
 class LugarAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Persona)
+@admin.register(models.Persona)
 class PersonaAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Contacto)
+@admin.register(models.Contacto)
 class ContactoAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Organizacion)
+@admin.register(models.Organizacion)
 class OrganizacionAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Participante)
+@admin.register(models.Participante)
 class ParticipanteAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(TipoGestion)
+@admin.register(models.TipoGestion)
 class TipoGestionAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(models.TipoContacto)
+class TipoContactoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion', )
+    pass
+
+
+@admin.register(models.TipoOrganizacion)
+class TipoOrganizacionAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'descripcion', )
     pass

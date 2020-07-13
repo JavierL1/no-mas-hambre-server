@@ -10,16 +10,27 @@ class Region(models.Model):
 
     nombre = models.CharField(verbose_name='nombre', max_length=64)
     codigo = models.IntegerField(verbose_name='código')
-    posicion = models.IntegerField(verbose_name='posición')
-    alias = models.CharField(verbose_name='alias', max_length=64)
+    posicion = models.IntegerField(verbose_name='posición', null=True)
+    alias = models.CharField(verbose_name='alias', null=True, max_length=64)
+
+
+class Provincia(models.Model):
+    nombre = models.CharField(verbose_name='nombre', max_length=64)
+    codigo = models.IntegerField(verbose_name='código')
+    region = models.ForeignKey(
+        Region,
+        verbose_name='región',
+        on_delete=models.CASCADE,
+        related_name='provincias'
+    )
 
 
 class Comuna(models.Model):
     nombre = models.CharField(verbose_name='nombre', max_length=64)
     codigo = models.IntegerField(verbose_name='código')
-    region = models.ForeignKey(
-        Region,
-        verbose_name='comuna',
+    provincia = models.ForeignKey(
+        Provincia,
+        verbose_name='provincia',
         on_delete=models.CASCADE,
         related_name='comunas'
     )
@@ -65,24 +76,20 @@ class Persona(models.Model):
     )
 
 
-class Contacto(models.Model):
-    class TipoContacto(models.TextChoices):
-        NO_ASIGNADA = 'NA'
-        TELEFONO_MOVIL = 'TM'
-        TELEFONO_FIJO = 'TF'
-        FACEBOOK = 'FB'
-        TWITTER = 'TW'
-        INSTAGRAM = 'IG'
-        LINKED_IN = 'LI'
-        EMAIL = 'EM'
+class TipoContacto(models.Model):
+    class Meta:
+        verbose_name = 'tipo de contacto'
+        verbose_name_plural = 'tipos de contacto'
 
-
-    tipo_contacto = models.CharField(
-        verbose_name='tipo de contacto',
-        max_length=2,
-        choices=TipoContacto.choices,
-        default=TipoContacto.NO_ASIGNADA
+    nombre = models.CharField(
+        'nombre', max_length=64, unique=True, null=False, blank=False
     )
+    descripcion = models.CharField(
+        'descripción', max_length=300, null=True, blank=True
+    )
+
+
+class Contacto(models.Model):
     contenido = models.CharField(
         verbose_name='url/usuario/numero', max_length=300
     )
@@ -91,6 +98,27 @@ class Contacto(models.Model):
         verbose_name='persona',
         on_delete=models.CASCADE,
         related_name='contactos'
+    )
+    tipo = models.ForeignKey(
+        TipoContacto,
+        verbose_name='tipo de contacto',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='contactos'
+    )
+
+
+class TipoOrganizacion(models.Model):
+    class Meta:
+        verbose_name = 'tipo de organización'
+        verbose_name_plural = 'tipos de organización'
+
+    nombre = models.CharField(
+        'nombre', max_length=64, unique=True, null=False, blank=False
+    )
+    descripcion = models.CharField(
+        'descripción', max_length=300, null=True, blank=True
     )
 
 
@@ -105,6 +133,14 @@ class Organizacion(models.Model):
     )
     rut = models.IntegerField('rut', null=True, blank=True)
     dv = models.IntegerField('dv', null=True, blank=True)
+    tipo = models.ForeignKey(
+        TipoOrganizacion,
+        verbose_name='tipo de organización',
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name='organizaciones'
+    )
     lugar = models.ForeignKey(
         Lugar,
         verbose_name='lugar',
@@ -118,7 +154,7 @@ class Organizacion(models.Model):
 class Participante(models.Model):
     organizacion = models.ForeignKey(
         Organizacion,
-        verbose_name='persona',
+        verbose_name='organización',
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

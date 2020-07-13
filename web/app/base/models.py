@@ -78,7 +78,7 @@ class Persona(models.Model):
 
 class TipoContacto(models.Model):
     class Meta:
-        verbose_name = 'tipo de organización'
+        verbose_name = 'tipo de contacto'
         verbose_name_plural = 'tipos de contacto'
 
     nombre = models.CharField(
